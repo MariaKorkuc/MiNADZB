@@ -1,6 +1,7 @@
 from scrapy import Spider
 from scrapy.selector import Selector
-from DatasetScrap.items import DatasetscrapItem
+from Scrapping.DatasetScrap.DatasetScrap.items import DatasetscrapItem
+#from DatasetScrap.items import DatasetscrapItem
 
 class DatasetSpider(Spider):
     name = "dataset"
