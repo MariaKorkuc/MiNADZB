@@ -12,7 +12,8 @@ hyperlink==21.0.0
 idna==3.3
 incremental==21.3.0
 itemadapter==0.4.0
-itemloaders==1.0.4
+itemloaders==1.0.4pdf = report.Report(output='example.pdf')
+payload = pdf.get_payload()
 jmespath==0.10.0
 lxml==4.6.4
 parsel==1.6.0
@@ -29,8 +30,9 @@ Scrapy==2.5.1
 service-identity==21.1.0
 six==1.16.0
 Twisted==21.7.0
-twisted-iocpsupport==1.0.2
 typing-extensions==3.10.0.2
 w3lib==1.22.0
 wincertstore==0.2
 zope.interface==5.4.0
+##gilfoyle
+##gapandas

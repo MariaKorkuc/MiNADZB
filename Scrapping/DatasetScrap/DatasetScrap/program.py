@@ -1,10 +1,11 @@
+from Scrapping.DatasetScrap.DatasetScrap.analyticalStatistics import print_statistics
 from spiders.dataset_spider import DatasetSpider
 from pymongo import MongoClient
 from scrapy.selector import Selector
 import requests as requests
 import os
 from scrapy.crawler import CrawlerProcess
-def scrap():
+#def scrap():
 
 
 
@@ -74,5 +75,7 @@ if __name__ == '__main__':
     choice = input(info)
     if(choice == '1'):
         set_local_db()
+    elif (choice == '3'):
+        print_statistics()
     elif(choice == 'x'):
         exit(0)
