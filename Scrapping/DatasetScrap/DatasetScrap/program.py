@@ -9,7 +9,7 @@ from scrapy.crawler import CrawlerProcess
 
 
 
-def set_local_db():
+def set_local_db(username, password):
     local = MongoClient("mongodb://localhost:27017/")
     db_name = 'MINADZB'
     coll_name = 'covid'
@@ -38,16 +38,18 @@ def set_local_db():
         db_local = local[db_name]
         records = db_local[coll_name]
 
-    set_cloud(records, coll_name, db_name)
+    set_cloud(records, coll_name, db_name, username, password)
 
     # db_local = local['MINADZB']
     # db_local.drop_collection(coll_name)
 
 
 
-def set_cloud(records, coll_name, db_name):
-    client = MongoClient(
-        "mongodb+srv://admin:Password123@covid.7imo3.mongodb.net/MINADZB_cloud?retryWrites=true&w=majority")
+def set_cloud(records, coll_name, db_name, username, password):
+    link = "mongodb+srv://"+username+":"+password+"@covid.7imo3.mongodb.net/MINADZB_cloud?retryWrites=true&w=majority"
+    client = MongoClient(link)
+    # client = MongoClient(
+    #     "mongodb+srv://admin:Password123@covid.7imo3.mongodb.net/MINADZB_cloud?retryWrites=true&w=majority")
     # client = MongoClient(
     #     "mongodb://admin:Password123@covid-shard-00-00.7imo3.mongodb.net:27017,covid-shard-00-01.7imo3.mongodb.net:27017,covid-shard-00-02.7imo3.mongodb.net:27017/MINADZB_cloud?ssl=true&replicaSet=atlas-gghftr-shard-0&authSource=admin&retryWrites=true&w=majority")
 
@@ -75,7 +77,9 @@ if __name__ == '__main__':
     """
     choice = input(info)
     if(choice == '1'):
-        set_local_db()
+        username = input('Enter username: ')
+        password = input('Enter password: ')
+        set_local_db(username, password)
     elif (choice == '3'):
         print_statistics()
     elif(choice == 'x'):
