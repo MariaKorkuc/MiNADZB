@@ -26,6 +26,7 @@ def set_local_db():
         for row in rows:
             new_item = {
                 'date': row.xpath('td[2]//text()').extract_first(),
+                'county': row.xpath('td[3]//text()').extract_first(),
                 'state': row.xpath('td[4]//text()').extract_first(),
                 'cases': row.xpath('td[6]//text()').extract_first(),
                 'deaths': row.xpath('td[7]//text()').extract_first(),
