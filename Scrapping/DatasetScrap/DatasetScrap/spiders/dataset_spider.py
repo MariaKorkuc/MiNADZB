@@ -1,7 +1,19 @@
-from scrapy import Spider
+from scrapy import Spider, Item
 from scrapy.selector import Selector
-from Scrapping.DatasetScrap.DatasetScrap.items import DatasetscrapItem
-#from DatasetScrap.items import DatasetscrapItem
+# from DatasetScrap.items import DatasetscrapItem
+
+from scrapy.item import Item, Field
+
+
+class DatasetscrapItem(Item):
+    date = Field()
+    state = Field()
+    cases = Field()
+    deaths = Field()
+    confirmed_cases = Field()
+    confirmed_deaths = Field()
+
+
 
 class DatasetSpider(Spider):
     name = "dataset"
