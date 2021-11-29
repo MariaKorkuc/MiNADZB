@@ -8,7 +8,6 @@ def print_statistics(states):
             "mongodb+srv://admin:Password123@covid.7imo3.mongodb.net/MINADZB?retryWrites=true&w=majority")
     db = client.get_default_database('MINADZB')
     records = db.covid
-    myCursor = records.find({})
     df = pd.DataFrame(list(records.find({})))
 
     #porzadkowanie danych
@@ -29,6 +28,7 @@ def print_statistics(states):
     plt.show()
 
 
+    #oblicznie zgonow dziennych
     newCases = []
     newCases.append(0)
     n = len(dfUS.index)-1
@@ -42,6 +42,7 @@ def print_statistics(states):
     plt.show()
 
 
+    #rysowanie plotwo dla stanow
     for x in range(len(states)):
         dfStates.loc[dfStates['state'] == states[x]].set_index(['date'])['cases'].plot(figsize=(20, 20), title='Total cases in '+states[x]+' in millions')
         plt.show()
