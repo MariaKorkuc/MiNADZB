@@ -1,11 +1,12 @@
-from Scrapping.DatasetScrap.DatasetScrap.analyticalStatistics import print_statistics
+from analyticalStatistics import print_statistics
 from spiders.dataset_spider import DatasetSpider
 from pymongo import MongoClient
 from scrapy.selector import Selector
 import requests as requests
+from getpass import getpass
 import os
 from scrapy.crawler import CrawlerProcess
-#def scrap():
+# def scrap():
 
 
 
@@ -21,6 +22,7 @@ def set_local_db(username, password):
         # process = CrawlerProcess()
         # process.crawl(DatasetSpider)
         # process.start()
+        #1
         response = requests.get('https://github.com/nytimes/covid-19-data/blob/master/live/us-counties.csv')
         rows = Selector(response).xpath("//table[@class='js-csv-data csv-data js-file-line-container']//tbody//tr")
         for row in rows:
@@ -71,16 +73,21 @@ if __name__ == '__main__':
     print('COVID DATABASE\n')
     info = """
     1 - Set database from scratch
-    2 - Insert data
-    3 - Print statistics
+    2 - Print statistics
     x - exit
     """
+    states = []
     choice = input(info)
     if(choice == '1'):
-        username = input('Enter username: ')
-        password = input('Enter password: ')
+        username = input('Username: ')
+        password = getpass()
         set_local_db(username, password)
-    elif (choice == '3'):
-        print_statistics()
+    elif (choice == '2'):
+        n = int(input("Number of states : "))
+        for i in range(0, n):
+            x = input("Enter "+str(i+1)+"st state name: ")
+            states.append(x)
+            n = n+1
+        print_statistics(states)
     elif(choice == 'x'):
         exit(0)
