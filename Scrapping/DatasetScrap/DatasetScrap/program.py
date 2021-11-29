@@ -6,7 +6,6 @@ import requests as requests
 from getpass import getpass
 import os
 from scrapy.crawler import CrawlerProcess
-# def scrap():
 
 
 
@@ -23,6 +22,7 @@ def set_local_db(username, password):
         # process.crawl(DatasetSpider)
         # process.start()
         #1
+
         response = requests.get('https://github.com/nytimes/covid-19-data/blob/master/live/us-counties.csv')
         rows = Selector(response).xpath("//table[@class='js-csv-data csv-data js-file-line-container']//tbody//tr")
         for row in rows:
@@ -42,18 +42,11 @@ def set_local_db(username, password):
 
     set_cloud(records, coll_name, db_name, username, password)
 
-    # db_local = local['MINADZB']
-    # db_local.drop_collection(coll_name)
-
 
 
 def set_cloud(records, coll_name, db_name, username, password):
     link = "mongodb+srv://"+username+":"+password+"@covid.7imo3.mongodb.net/MINADZB_cloud?retryWrites=true&w=majority"
     client = MongoClient(link)
-    # client = MongoClient(
-    #     "mongodb+srv://admin:Password123@covid.7imo3.mongodb.net/MINADZB_cloud?retryWrites=true&w=majority")
-    # client = MongoClient(
-    #     "mongodb://admin:Password123@covid-shard-00-00.7imo3.mongodb.net:27017,covid-shard-00-01.7imo3.mongodb.net:27017,covid-shard-00-02.7imo3.mongodb.net:27017/MINADZB_cloud?ssl=true&replicaSet=atlas-gghftr-shard-0&authSource=admin&retryWrites=true&w=majority")
 
     db = client[db_name]
     db.drop_collection(coll_name)
@@ -61,12 +54,6 @@ def set_cloud(records, coll_name, db_name, username, password):
 
     for record in records.find({}):
         records_cloud.insert_one(record)
-    # db = client.get_default_database('MINADZB_cloud')
-    # records = db.covid_records
-    # client.admin.command('copydb',
-    #                      fromdb='MINADZB',
-    #                      todb='MINADZB_cloud',
-    #                      fromhost="localhost:27018")
 
 
 if __name__ == '__main__':
