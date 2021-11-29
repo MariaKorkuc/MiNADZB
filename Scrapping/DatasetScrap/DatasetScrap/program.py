@@ -36,7 +36,7 @@ def set_local_db(username, password):
         }
 
         #if(records.countDocuments({'date': new_item.get('date')})>=3251):
-        #if (records.find({'date': new_item.get('date')}).countDocuments() > 3251):
+        #if (records.find({'date': new_item.get('date')}).countDocuments() > 3251)
         if(records.find({'date': new_item.get('date')}).count() >= 3251):
             print("Today's data is already in DB")
             exit(0)
